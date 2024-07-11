@@ -53,10 +53,10 @@ class HttpLoggingFilter : OncePerRequestFilter() {
         val requestData = """
             |
             |[HTTP] ${request.method} ${request.requestURI} - ${response.status} (elapsed: ${elapsed})
-            |REQUEST_HEADERS >> ${makeHeaders(request.headerNames.toList()) { name -> request.getHeader(name) }}
-            |REQUEST_BODY >> ${String(request.contentAsByteArray)}
-            |RESPONSE_HEADERS >>  ${makeHeaders(response.headerNames.toList()) { name -> response.getHeader(name) ?: "" }}
-            |RESPONSE_BODY >> ${String(response.contentAsByteArray)}
+            |[REQUEST_HEADER] ${makeHeaders(request.headerNames.toList()) { name -> request.getHeader(name) }}
+            |[REQUEST_BODY] ${String(request.contentAsByteArray)}
+            |[RESPONSE_HEADERS] ${makeHeaders(response.headerNames.toList()) { name -> response.getHeader(name) ?: "" }}
+            |[RESPONSE_BODY] ${String(response.contentAsByteArray)}
             |
         """.trimMargin()
 
