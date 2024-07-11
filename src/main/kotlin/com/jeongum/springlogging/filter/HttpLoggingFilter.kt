@@ -1,7 +1,6 @@
 package com.jeongum.springlogging.filter
 
 import com.jeongum.springlogging.config.HeaderKeys
-import com.sun.org.apache.bcel.internal.Const
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -30,9 +29,9 @@ class HttpLoggingFilter : OncePerRequestFilter() {
         val reqWrapper = ContentCachingRequestWrapper(request)
         val resWrapper = ContentCachingResponseWrapper(response)
 
-        val requestId = "noun-" + UUID.randomUUID().toString().replace("-", "")
-        MDC.put(HeaderKeys.TRACE_ID, requestId)
-        resWrapper.setHeader(HeaderKeys.TRACE_ID, requestId)
+        val traceId = "traceId-" + UUID.randomUUID().toString().replace("-", "")
+        MDC.put(HeaderKeys.TRACE_ID, traceId)
+        resWrapper.setHeader(HeaderKeys.TRACE_ID, traceId)
 
         filterChain.doFilter(reqWrapper, resWrapper)
 
